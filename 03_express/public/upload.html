@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>파일업로드</h3>
+    <form action="upload" method="post" enctype="multipart/form-data">
+      <table>
+        <tr>
+          <td>이름 :</td>
+          <td><input type="text" name="myName" /></td>
+        </tr>
+        <tr>
+          <td>파일 :</td>
+          <!-- accept는 이미지파일만 업로드-->
+          <td><input type="file" accept="image/*" name="myFile" /></td>
+        </tr>
+        <tr>
+          <td colspan="2" ailgn="center">
+            <input type="submit" value="업로드" />
+          </td>
+        </tr>
+      </table>
+    </form>
+    <button id="btn">클릭</button>
+    <script>
+      document.querySelector("#btn").addEventListener("click", function (e) {
+        fetch("http://localhost:3000/getCors") // http://localhost:3000/getCors 보안상의 이유로 호스트, 포트까지 다 같아야 동일한 리소스에서 요청을 해야 결과값을 가져온다. 동일출처법칙 위배(app.js 참고)
+          .then((response) => response.json())
+          .then((result) => console.log(result))
+          .catch((err) => console.log(err));
+      });
+    </script>
+  </body>
+</html>
