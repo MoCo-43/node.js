@@ -28,7 +28,7 @@
     <button id="btn">클릭</button>
     <script>
       document.querySelector("#btn").addEventListener("click", function (e) {
-        fetch("http://localhost:3000/getCors") // http://localhost:3000/getCors 보안상의 이유로 호스트, 포트까지 다 같아야 동일한 리소스에서 요청을 해야 결과값을 가져온다. 동일출처법칙 위배(app.js 참고)
+        fetch("http://localhost:3000/getCors") // http://localhost:3000/getCors 보안상의 이유로 호스트, 포트까지 다 같아야 동일한 리소스에서 요청을 하게 되어 결과값을 가져온다. 동일출처법칙 위배(app.js 참고)
           .then((response) => response.json())
           .then((result) => console.log(result))
           .catch((err) => console.log(err));

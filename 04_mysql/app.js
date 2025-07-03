@@ -73,16 +73,10 @@ function query(alias, values) {
 
 // 정의한 쿼리 함수로 SQL 작성
 
-// query SELECT
-query("customerList", {
-  name: "홍길동",
-  email: "hong@email.com",
-  phone: "010-1111-2222",
-  address: "",
-});
-console.log("customerList");
+// Select 조회
+query("customerList");
 
-// query Insert
+// 삽입
 query("customerInsert", {
   name: "홍길동",
   email: "hong@email.com",
@@ -90,13 +84,13 @@ query("customerInsert", {
   address: "",
 });
 
-// query Delete
-query("customerDelete", 5); // ← 5는 실제로 삭제할 id
+// DELETE 삭제
+query("customerDelete", 5); // 또는 query("customerDelete", [5])  // 5는 실제로 삭제할 id
 
-// query Update
+// UPDATE 수정
 query("customerUpdate", [
   {
-    name: "수정할이름",
+    name: "수정된이름",
     email: "new@email.com",
     phone: "010-2222-3333",
     address: "서울시",

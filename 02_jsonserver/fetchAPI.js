@@ -55,5 +55,22 @@ async function json_func() {
   }
 }
 
+// delete
+// async function json_func() {
+//   try {
+//     let promise = await fetch("http://localhost:3000/posts/20", {
+//       method: "delete",
+//     });
+//     let resolve = await promise.json(); // promise가 끝날때까지 기다림
+//     console.log("결과=>", resolve); // return해줄값이 없어 await사용이 안됨
+//     // 조회
+//     promise = await fetch("http://localhost:3000/posts");
+//     resolve = await promise.json();
+//     console.log("조회=>", resolve);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// }
+
 // 함수호출
 json_func();

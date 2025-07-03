@@ -55,7 +55,7 @@ const upload = multer({
 app.use(cors({ origin: "http://192.168.0.26:5500/" }));
 
 // 동일출처원칙
-// 보안상의 이유로 호스트, 포트까지 다 같아야 동일한 리소스에서 요청을 해야 결과값을 가져온다. 동일출처법칙 위배(app.js 참고)
+// 보안상의 이유로 호스트, 포트까지 다 같아야 동일한 리소스에서 요청을 하게 되어 결과값을 가져온다.
 app.get("/getCors", (req, res) => {
   let result = { id: "user01", name: "hong" };
   res.json(result);
