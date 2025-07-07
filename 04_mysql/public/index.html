@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      crossorigin="anonymous"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <table class="table">
+      <tr>
+        <th>보내는사람</th>
+        <td><input type="text" name="from" id="" /></td>
+      </tr>
+      <tr>
+        <th>받는사람</th>
+        <td><input type="text" name="to" id="" /></td>
+      </tr>
+      <tr>
+        <th>제목</th>
+        <td><input type="text" name="subject" id="" /></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <textarea name="content" id=""></textarea>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center">
+          <button id="sendBtn">메일발송</button>
+        </td>
+      </tr>
+    </table>
+    <script>
+      document.querySelector("#sendBtn").addEventListener("click", (e) => {
+        let from = document.querySelector('input[name="from"]').value;
+        let to = document.querySelector('input[name="to"]').value;
+        let subject = document.querySelector('input[name="subject"]').value;
+        let text = document.querySelector('textarea[name="content"]').value;
+
+        const data = { from, to, subject, text };
+        fetch("/email", {
+          method: "post",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ param: data }),
+        })
+          .then((resolve) => {
+            return resolve.json();
+          })
+          .then((result) => {
+            if (result.retCode == "success") {
+              alert(result.retVal.accepted[0] + "에게 메일을 발송했습니다.");
+              // console.log(result.retVal.accepted[0]);  // 결과값의 보낼사람 메일
+              document.querySelector('input[name="subject"]').value = "";
+              document.querySelector('textarea[name="content"]').value = "";
+            } else {
+              console.log("확인요.");
+            }
+          })
+          .catch((err) => console.log(err));
+      });
+    </script>
+  </body>
+</html>

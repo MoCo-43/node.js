@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      crossorigin="anonymous"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <table class="table">
+      <tr>
+        <th>첨부파일</th>
+        <td><input type="file" name="myFile" class="form=control" id="" /></td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center">
+          <button id="sendBtn">업로드</button>
+        </td>
+      </tr>
+    </table>
+    <script>
+      // 업로드 버튼
+      document.querySelector("#sendBtn").addEventListener("click", (e) => {
+        let myFile = document.querySelector('input[name="myFile"]');
+        if (!myFile) {
+          alert("파일을 선택하세요");
+          return;
+        }
+        console.log(myFile.files[0]);
+        let formData = new FormData(); // multipart-/form-data
+        formData.append("myFile", myFile.files[0]);
+
+        fetch("excel", {
+          method: "post",
+          body: formData,
+        })
+          .then((resolve) => resolve.text())
+          .then((result) => {
+            console.log(result);
+            alert("업로드성공");
+          })
+          .catch((err) => console.log(err));
+      });
+    </script>
+  </body>
+</html>
