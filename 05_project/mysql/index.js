@@ -1,5 +1,5 @@
 const mysql = require("mysql2");
-const sql = require("./product"); // {custList }
+const sql = require("./product.js"); // {custList }
 
 const pool = mysql.createPool({
   host: process.env.HOST,
