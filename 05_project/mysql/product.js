@@ -28,7 +28,7 @@ module.exports = {
             from t_product t1, t_image t2, t_category t3
             where t1.id = ?
             and t1.id = t2.product_id
-            and t2.type = 2
+            and t2.type = 1
             and t1.category_id = t3.id`,
   },
   // 상품 메인 이미지

@@ -106,13 +106,3 @@ app.delete("/todo/:id", async (req, res) => {
     res.json(err);
   }
 });
-
-// todoList 등록
-app.post("/addTodo", async (req, res) => {
-  try {
-    const result = await query("todoInsert");
-    res.json(result);
-  } catch (err) {
-    res.json(err);
-  }
-});
