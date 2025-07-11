@@ -1,4 +1,10 @@
 module.exports = {
+  // todo목록.
+  todoList: { query: `select * from tbl_todo` },
+  // todo삭제.
+  todoDelete: { query: `delete from tbl_todo where id = ?` },
+  // todo삽입
+  todoInsert: { query: `insert into tbl_todo set ?` },
   // 상품목록
   productList: {
     query: `select t1.*, t2.path, t3.category1, t3.category2, t3.category3

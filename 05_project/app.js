@@ -1,5 +1,6 @@
 const express = require("express");
 const fs = require("fs");
+const cors = require("cors");
 require("dotenv").config({ path: "./mysql/.env" });
 
 const { query } = require("./mysql/index.js");
@@ -10,6 +11,7 @@ const app = express();
 // body-parser
 // express모듈이 body-parser에 포함되어 있음
 app.use(express.json());
+app.use(cors());
 
 app.listen(3000, () => {
   console.log(`npm install`);
@@ -48,4 +50,30 @@ app.post("/api/:alias", async (req, res) => {
 
   const result = await query(req.params.alias, req.body.param, req.body.where);
   res.send(result);
+});
+
+// todo목록.
+app.get("/todoList", async (req, res) => {
+  const result = await query("todoList");
+  console.log(result);
+  res.json(result);
+});
+
+// todo삭제.
+app.delete("/todo/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await query("todoDelete", id);
+    res.json(result);
+  } catch (err) {
+    res.json(err);
+  }
+});
+
+// todo삽입
+app.post("/todoAdd/:name/:chk", async (req, res) => {
+  const { name, chk } = req.body;
+  const result = await query("todoInsert", name, chk);
+  res.json(result);
+  console.log({ name, chk });
 });
