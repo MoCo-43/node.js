@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <form action="">
+      <input type="file" name="base64" />
+      <button type="button">upload</button>
+    </form>
+
+    <script>
+      let data = ""; // base64 인코딩 데이터
+      let fn; // 파일명
+      // 파일선택
+      document
+        .querySelector('input[name="base64"]')
+        .addEventListener("change", (e) => {
+          // console.dir(e.target.files[0]);
+          let file = e.target.files[0]; // 업로드된 파일
+          fn = file.name;
+          let fr = new FileReader();
+          fr.onload = function (evt) {
+            // 2. 이벤트가 발생
+            console.log(evt.target.result); // axios 라이브러리를 사용해서 전달할 값
+            data = evt.target.result;
+          };
+          fr.readAsDataURL(file); // 1. 파일을 읽는 이벤트가 발생하면
+        });
+
+      // 저장버튼
+      document
+        .querySelector('button[type="button"]')
+        .addEventListener("click", async (e) => {
+          let result = await axios({
+            method: "post",
+            url: "/upload/" + fn + "/8", // 마지막은 상품id가 8번을 의미
+            data: { data }, // key와 value값이 같으면 이렇게 생략 가능
+          });
+          console.log(result);
+        });
+    </script>
+  </body>
+</html>
