@@ -1,19 +1,10 @@
 module.exports = {
-<<<<<<< HEAD
   // todo목록.
   todoList: { query: `select * from tbl_todo` },
   // todo삭제.
   todoDelete: { query: `delete from tbl_todo where id = ?` },
   // todo삽입
   todoInsert: { query: `insert into tbl_todo set ?` },
-=======
-  // todo목록
-  todoList: { query: "select * from tbl_todo" },
-  // todo목록 삭제
-  todoDelete: { query: "delete from tbl_todo where id = ?" },
-  // todo목록 입력
-  todoInsert: { query: "insert into tbl_todo set ? " },
->>>>>>> f24f17a7a82a3359b412a3cd86f377b98c1e4630
   // 상품목록
   productList: {
     query: `select t1.*, t2.path, t3.category1, t3.category2, t3.category3
@@ -33,12 +24,13 @@ module.exports = {
   },
   // 상품상세
   productDetail: {
-    query: `select t1.*, t2.path, t3.category1, t3.category2, t3.category3
-            from t_product t1, t_image t2, t_category t3
-            where t1.id = ?
-            and t1.id = t2.product_id
-            and t2.type = 1
-            and t1.category_id = t3.id`,
+    query: `SELECT t1.*, t2.path, t3.category1, t3.category2, t3.category3, t2.type
+            FROM t_product t1
+            LEFT OUTER JOIN t_image t2 ON t1.id = t2.product_id AND t2.type in (1, 3)
+            LEFT OUTER JOIN t_category t3 ON t1.category_id = t3.id
+            WHERE t1.id = ?
+            ORDER BY t2.type DESC
+            LIMIT 1`,
   },
   // 상품 메인 이미지
   productMainImages: {
